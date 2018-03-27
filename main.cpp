@@ -34,16 +34,28 @@ int main(int argc, char** argv) {
         SDL_Event keyevent;
         SDL_WaitEvent(&keyevent);
         if(keyevent.type == SDL_KEYDOWN) {
-            int key = SDL_PollEvent(&keyevent);
-            cout << key << endl;
-            quit = true;
-            SDL_Quit();
-            return 0;
+//            quit = true;
+//            SDL_Quit();
+//            return 0;
         }
         if(keyevent.type == SDL_QUIT) {
             SDL_Quit();
             return 0;
         }
+//        const Uint8* keystate =  SDL_GetKeyboardState(nullptr);
+//        cout << keystate << endl;
+
+        const Uint8 *keystate = SDL_GetKeyboardState(nullptr);
+
+        int keycode = SDL_SCANCODE_TO_KEYCODE(*keystate);
+        const char* key = SDL_GetKeyName(keycode);
+        if(keyevent.type == SDL_KEYDOWN) {
+            cout << key << endl;
+        }
+        if (keystate[SDL_SCANCODE_RETURN]) {
+            cout << "Return Key pressed" << endl;
+        }
+
 
         // screen update
         SDL_RenderPresent(renderer);
