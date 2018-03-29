@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "include/SDL2/SDL.h"
+#include "SDL2/SDL.h"
 #include "Game.h"
 
 using namespace std;
