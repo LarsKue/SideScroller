@@ -71,8 +71,8 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-    destR.w = 32;
-    destR.h = 32;
+    destR.w = 32*5;
+    destR.h = 32*5;
 }
 
 void Game::render() {
