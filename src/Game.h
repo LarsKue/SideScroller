@@ -1,8 +1,9 @@
 #ifndef SIDESCROLLER_GAME_H
 #define SIDESCROLLER_GAME_H
 
-#include <SDL2/SDL.h>
 #include <cstdio>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 class Game {
 

@@ -3,6 +3,9 @@
 
 using namespace std;
 
+SDL_Texture* playerTex = NULL;
+SDL_Rect srcR, destR;
+
 Game::Game() {}
 
 Game::~Game() {}
@@ -22,13 +25,15 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             cout << "Renderer created!" << endl;
         }
         isRunning = true;
-    } else {
+    } else
         isRunning = false;
-    }
+
+    playerTex = IMG_LoadTexture(renderer, "assets/player.png");
+
 }
 
 void Game::handleEvents() {
@@ -66,12 +71,15 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+    destR.w = 32;
+    destR.h = 32;
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
 
     // add here stuff to render
+    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
 
     SDL_RenderPresent(renderer);
 }
