@@ -2,11 +2,13 @@
 // Created by Lars on 30/03/2018.
 //
 
-#include "Game.h"
+//#include "Game.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 class GameObject {
 public:
-    GameObject(const char* texturesheet, SDL_Renderer* ren);
+    GameObject(const char* texturesheet, SDL_Renderer* ren, int x, int y);
     ~GameObject();
 
     void Update();

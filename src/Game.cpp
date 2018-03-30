@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Game.h"
+#include "GameObject.h"
 
 using namespace std;
 
-SDL_Texture* playerTex = NULL;
-SDL_Rect srcR, destR;
+GameObject* player;
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -43,7 +43,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     } else
         isRunning = false;
 
-    playerTex = IMG_LoadTexture(renderer, "assets/player.png");
+    player = new GameObject("assets/player.png", renderer, 0, 0);
 
 }
 
@@ -85,14 +85,7 @@ void Game::handleEvents() {
 
 // This is what happens every frame
 void Game::update() {
-    destR.w = 32*5;
-    destR.h = 32*5;
-    destR.x = cnt;
-    destR.y = 200;
-
-    cnt++;
-    if(cnt > width)
-        cnt = - destR.w;
+    player->Update();
 }
 
 // This is what get's rendered every frame
@@ -100,7 +93,7 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     // add here stuff to render
-    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+    player->Render();
 
     SDL_RenderPresent(renderer);
 }
