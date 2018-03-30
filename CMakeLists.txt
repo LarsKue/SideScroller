@@ -17,7 +17,7 @@ configure_file(lib/dlls/SDL2_image.dll SDL2_image.dll COPYONLY)
 configure_file(lib/dlls/libpng16-16.dll libpng16-16.dll COPYONLY)
 configure_file(lib/dlls/zlib1.dll zlib1.dll COPYONLY)
 
-set(SOURCE_FILES src/main.cpp src/player.cpp src/player.h src/Game.cpp src/Game.h)
+set(SOURCE_FILES src/main.cpp src/player.cpp src/player.h src/Game.cpp src/Game.h src/TextureManager.cpp src/TextureManager.h)
 add_executable(SideScroller ${SOURCE_FILES})
 
 target_link_libraries(SideScroller SDL2main SDL2 SDL2_image)
