@@ -28,6 +28,10 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             cout << "Renderer created!" << endl;
         }
+
+        this->width = width;
+        this->height = height;
+        cnt = (width / 2 - 100) * 20;
         isRunning = true;
     } else
         isRunning = false;
@@ -38,7 +42,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
 void Game::handleEvents() {
     SDL_Event event;
-    SDL_WaitEvent(&event);
+    SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT:
             isRunning = false;
@@ -73,6 +77,12 @@ void Game::handleEvents() {
 void Game::update() {
     destR.w = 32*5;
     destR.h = 32*5;
+    destR.x = cnt / 20;
+    destR.y = 200;
+
+    cnt++;
+    if(cnt > width * 20)
+        cnt = - destR.w * 20;
 }
 
 void Game::render() {
