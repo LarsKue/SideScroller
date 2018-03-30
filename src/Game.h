@@ -1,5 +1,5 @@
-#ifndef SIDESCROLLER_GAME_H
-#define SIDESCROLLER_GAME_H
+//#ifndef SIDESCROLLER_GAME_H
+//#define SIDESCROLLER_GAME_H
 
 #include <cstdio>
 #include <SDL2/SDL.h>
