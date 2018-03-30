@@ -1,10 +1,13 @@
 #include <iostream>
 #include "Game.h"
 #include "GameObject.h"
+#include "TextureManager.h"
 
 using namespace std;
 
-GameObject *player;
+GameObject* player;
+GameObject* player2;
+TextureManager* playerTex;
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -34,7 +37,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             cout << "Renderer created!" << endl;
         }
 
@@ -43,7 +46,10 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     } else
         isRunning = false;
 
-    player = new GameObject("assets/player.png", renderer, 0, 0);
+    playerTex = new TextureManager("assets/player.png", renderer);
+
+    player = new GameObject(playerTex, renderer, 0, 0);
+    player2 = new GameObject(playerTex, renderer, 50, 50);
 
 }
 
@@ -86,6 +92,7 @@ void Game::handleEvents() {
 // This is what happens every frame
 void Game::update() {
     player->Update();
+    player2->Update();
 }
 
 // This is what get's rendered every frame
@@ -94,6 +101,7 @@ void Game::render() {
 
     // add here stuff to render
     player->Render();
+    player2->Render();
 
     SDL_RenderPresent(renderer);
 }

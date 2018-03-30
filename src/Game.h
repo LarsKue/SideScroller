@@ -1,5 +1,5 @@
-#ifndef SIDESCROLLER_GAME_H
-#define SIDESCROLLER_GAME_H
+#ifndef GAME_H
+#define GAME_H
 
 #include <cstdio>
 #include <SDL2/SDL.h>
@@ -30,4 +30,4 @@ private:
     SDL_Renderer *renderer;
 };
 
-#endif  //SIDESCROLLER_GAME_H
+#endif

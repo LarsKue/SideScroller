@@ -1,14 +1,12 @@
-//
-// Created by Lars on 30/03/2018.
-//
-#ifndef SIDESCROLLER_GAMEOBJECT_H
-#define SIDESCROLLER_GAMEOBJECT_H
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 
 #include "Game.h"
+#include "TextureManager.h"
 
 class GameObject {
 public:
-    GameObject(const char* texturesheet, SDL_Renderer* ren, int x, int y);
+    GameObject(TextureManager* texture, SDL_Renderer* ren, int x, int y);
     ~GameObject();
 
     void Update();
@@ -18,11 +16,11 @@ private:
     int xpos;
     int ypos;
 
-    SDL_Texture *objTexture;
+    TextureManager *objTexture;
     SDL_Rect srcRect, destRect;
     SDL_Renderer *renderer;
 
 
 };
 
-#endif  //SIDESCROLLER_GAMEOBJECT_H
+#endif
