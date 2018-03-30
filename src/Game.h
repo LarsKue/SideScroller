@@ -23,11 +23,9 @@ public:
 private:
     int width = 0;
     int height = 0;
+    bool fullscreen = false;
     int cnt = 0;
     bool isRunning;
     SDL_Window *window;
     SDL_Renderer *renderer;
 };
-
-
-#endif //SIDESCROLLER_GAME_H
