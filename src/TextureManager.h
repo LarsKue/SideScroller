@@ -1,5 +1,5 @@
-//#ifndef SIDESCROLLER_TEXTUREMANAGER_H
-//#define SIDESCROLLER_TEXTUREMANAGER_H
+#ifndef SIDESCROLLER_TEXTUREMANAGER_H
+#define SIDESCROLLER_TEXTUREMANAGER_H
 
 #include "Game.h"
 
@@ -9,3 +9,5 @@ public:
     static SDL_Texture* LoadTexture(const char* filePath, SDL_Renderer* renderer);
 
 };
+
+#endif  //SIDESCROLLER_TEXTUREMANAGER_H

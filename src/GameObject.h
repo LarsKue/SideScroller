@@ -1,10 +1,10 @@
 //
 // Created by Lars on 30/03/2018.
 //
+#ifndef SIDESCROLLER_GAMEOBJECT_H
+#define SIDESCROLLER_GAMEOBJECT_H
 
-//#include "Game.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include "Game.h"
 
 class GameObject {
 public:
@@ -24,3 +24,5 @@ private:
 
 
 };
+
+#endif  //SIDESCROLLER_GAMEOBJECT_H
