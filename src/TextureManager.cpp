@@ -6,12 +6,16 @@
 #include "TextureManager.h"
 
 
-TextureManager::TextureManager(const char *filePath, SDL_Renderer *renderer) {
-    texture = IMG_LoadTexture(renderer, filePath);
+TextureManager::TextureManager(const char *filePath) {
+    texture = IMG_LoadTexture(Game::renderer, filePath);
     if(!texture)
-        std::cerr << "Konnte das Bild nicht laden! Fehler: " << IMG_GetError() << std::endl;
+        std::cerr << "Could not load image! Error: " << IMG_GetError() << std::endl;
 }
 
 SDL_Texture* TextureManager::getTexture() {
     return texture;
+}
+
+void TextureManager::Draw(SDL_Rect src, SDL_Rect dest) {
+    SDL_RenderCopy(Game::renderer, texture, &src, &dest);
 }

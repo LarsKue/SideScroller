@@ -2,12 +2,17 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "TextureManager.h"
+#include "Map.h"
 
 using namespace std;
 
 GameObject* player;
 GameObject* player2;
+Map* map;
+
 TextureManager* playerTex;
+
+SDL_Renderer *Game::renderer = nullptr;
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -37,7 +42,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 75, 255);
             cout << "Renderer created!" << endl;
         }
 
@@ -46,10 +51,11 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     } else
         isRunning = false;
 
-    playerTex = new TextureManager("assets/player.png", renderer);
+    playerTex = new TextureManager("assets/player.png");
 
-    player = new GameObject(playerTex, renderer, 0, 0);
-    player2 = new GameObject(playerTex, renderer, 50, 50);
+    player = new GameObject(playerTex, 0, 0);
+    player2 = new GameObject(playerTex, 50, 50);
+    map = new Map();
 
 }
 
@@ -100,6 +106,7 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     // add here stuff to render
+    map->DrawMap();
     player->Render();
     player2->Render();
 

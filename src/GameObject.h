@@ -6,7 +6,7 @@
 
 class GameObject {
 public:
-    GameObject(TextureManager* texture, SDL_Renderer* ren, int x, int y);
+    GameObject(TextureManager* texture, int x, int y);
     ~GameObject();
 
     void Update();
@@ -18,7 +18,6 @@ private:
 
     TextureManager *objTexture;
     SDL_Rect srcRect, destRect;
-    SDL_Renderer *renderer;
 
 
 };
