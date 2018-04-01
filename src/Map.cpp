@@ -6,12 +6,12 @@
 #include "TextureManager.h"
 
 int lvl1[20][25] = {
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -29,9 +29,9 @@ int lvl1[20][25] = {
 };
 
 Map::Map() {
-    dirtTex = new TextureManager("assets/dirt.png");
-    grassTex = new TextureManager("assets/grass.png");
-    waterTex = new TextureManager("assets/HD_water.png");
+    dirtTex = new TextureManager("assets/dirt_v1.png");
+    grassTex = new TextureManager("assets/grass_v1.png");
+    waterTex = new TextureManager("assets/water_v1.png");
 
     LoadMap(lvl1);
 
@@ -42,8 +42,8 @@ Map::Map() {
 
     dest.x = 0;
     dest.y = 0;
-    dest.w = tex_size;
-    dest.h = tex_size;
+    dest.w = tex_size * tex_scalar;
+    dest.h = tex_size * tex_scalar;
 }
 
 void Map::LoadMap(int arr[20][25]) {
@@ -61,8 +61,8 @@ void Map::DrawMap() {
         for(int column = 0; column < 25; column++) {
             type = map[row][column];
 
-            dest.x = column * tex_size;
-            dest.y = row * tex_size;
+            dest.x = column * tex_size * tex_scalar;
+            dest.y = row * tex_size * tex_scalar;
 
             switch(type) {
                 case 0:

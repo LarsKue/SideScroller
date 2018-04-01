@@ -53,8 +53,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     playerTex = new TextureManager("assets/player.png");
 
-    player = new GameObject(playerTex, 0, 0);
-    player2 = new GameObject(playerTex, 50, 50);
+    player = new GameObject(playerTex, 0, 0, 1);
+    player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
 
 }
@@ -105,7 +105,7 @@ void Game::update() {
 void Game::render() {
     SDL_RenderClear(renderer);
 
-    // add here stuff to render
+    // add stuff to render here
     map->DrawMap();
     player->Render();
     player2->Render();

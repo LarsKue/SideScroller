@@ -17,7 +17,8 @@ public:
     void DrawMap();
 
 private:
-    int tex_size = 256;
+    int tex_size = 32;
+    int tex_scalar = 2;
     SDL_Rect src, dest;
     TextureManager *dirtTex, *grassTex, *waterTex;
 
