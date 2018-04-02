@@ -55,7 +55,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     playerTex = new TextureManager("assets/player.png");
 
-    player = new GameObject(playerTex, 50, 50, 2);
+    player = new GameObject(playerTex, 50, 50, 1);
     player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
 
@@ -96,8 +96,7 @@ void Game::handleEvents() {
                     player->a_pressed = true;
                     break;
                 case SDLK_SPACE:
-                    if(player->isOnGround)
-                        player->add_fallvel(-2 * player->GetScale());
+                    player->space_pressed = true;
                     break;
                 default:
                     break;
@@ -126,6 +125,7 @@ void Game::handleEvents() {
                     player->a_pressed = false;
                     break;
                 case SDLK_SPACE:
+                    player->space_pressed = false;
                     break;
                 default:
                     break;

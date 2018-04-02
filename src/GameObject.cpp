@@ -48,6 +48,15 @@ void GameObject::handleMovement() {
     if(ypos == 350 + destRect.h) {
         isOnGround = true;
     }
+
+    //jump when the player presses space while on the ground
+    if(space_pressed) {
+        if (isOnGround) {
+            add_fallvel(-4 * scale);
+        }
+    }
+
+    //horizontal movement
     if(a_pressed) {
         if(isOnGround) {
             add_walkvel(-300 * accel/Game::FPS);
@@ -64,20 +73,21 @@ void GameObject::handleMovement() {
             add_walkvel(14.4 * accel/Game::FPS);
         }
     }
+
     // if no keys are pressed, the character slowly loses speed
     if(!d_pressed and !a_pressed) {
         if(walkvel > 0) {
             if(isOnGround) {
-                if(walkvel > 144/Game::FPS) {
-                    walkvel -= 144/Game::FPS;
+                if(walkvel > 144 * accel/Game::FPS) {
+                    walkvel -= 144 * accel/Game::FPS;
                 }
                 else {
                     walkvel = 0;
                 }
             }
             else {
-                if (walkvel > 14.4/Game::FPS) {
-                    walkvel -= 14.4/Game::FPS;
+                if (walkvel > 14.4 * accel/Game::FPS) {
+                    walkvel -= 14.4 * accel/Game::FPS;
                 } else {
                     walkvel = 0;
                 }
@@ -85,16 +95,16 @@ void GameObject::handleMovement() {
         }
         else if(walkvel < 0) {
             if(isOnGround) {
-                if(walkvel < -144/Game::FPS) {
-                    walkvel += 144/Game::FPS;
+                if(walkvel < -144 * accel/Game::FPS) {
+                    walkvel += 144 * accel/Game::FPS;
                 }
                 else {
                     walkvel = 0;
                 }
             }
             else {
-                if (walkvel < -14.4/Game::FPS) {
-                    walkvel += 14.4/Game::FPS;
+                if (walkvel < -14.4 * accel/Game::FPS) {
+                    walkvel += 14.4 * accel/Game::FPS;
                 } else {
                     walkvel = 0;
                 }

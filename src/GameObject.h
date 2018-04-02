@@ -34,14 +34,18 @@ public:
 
     bool d_pressed = false;
     bool a_pressed = false;
+    bool space_pressed = false;
 
 
 
 private:
+    //parameter multipliers
     double grav = 1;
     double accel = 1;
     double speed = 1;
     double scale;
+
+    //movement variables
     double xvel;
     double yvel;
     double walkvel;
