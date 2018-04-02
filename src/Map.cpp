@@ -3,7 +3,6 @@
 //
 
 #include "Map.h"
-#include "TextureManager.h"
 
 int lvl1[20][25] = {
         {1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},

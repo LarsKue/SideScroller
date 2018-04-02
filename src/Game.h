@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <iostream>
 #include <cstdio>
 #include <ctime>
 #include <SDL2/SDL.h>
@@ -21,17 +22,16 @@ public:
     bool running() { return isRunning; };
 
     static SDL_Renderer *renderer;
+    static SDL_Window *window;
     static double FPS;
 
 
 private:
-
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
     bool fullscreen = false;
     int cnt = 0;
     bool isRunning;
-    SDL_Window *window;
 };
 
 #endif

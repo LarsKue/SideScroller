@@ -58,7 +58,7 @@ private:
     SDL_Rect srcRect, destRect;
 
 
-
+    void handleMovement();
 };
 
 #endif

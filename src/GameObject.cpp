@@ -1,9 +1,4 @@
-//
-// Created by Lars on 30/03/2018.
-//
-
 #include "GameObject.h"
-#include <iostream>
 
 GameObject::GameObject(TextureManager* texture, double x, double y, int scale) {
     objTexture = texture;
@@ -21,9 +16,24 @@ void GameObject::Update() {
     srcRect.w = 32;
     srcRect.x = 0;
     srcRect.y = 0;
-
     destRect.h = int(nearbyint(srcRect.h*scale));
     destRect.w = int(nearbyint(srcRect.w*scale));
+
+    handleMovement();
+
+    destRect.x = int(nearbyint(xpos));
+    destRect.y = int(nearbyint(ypos));
+}
+
+void GameObject::Render() {
+    SDL_RenderCopy(Game::renderer, objTexture->getTexture(), &srcRect, &destRect);
+}
+
+void GameObject::handleMovement() {
+    int width = 0;
+    int height = 0;
+
+    SDL_GetWindowSize(Game::window, &width, &height);
 
     //stop falling when you hit the ground
     if(ypos < 350 + destRect.h) {
@@ -92,26 +102,16 @@ void GameObject::Update() {
         }
     }
 
+    // Stay on screen
     xpos += xvel + walkvel * speed;
+    if(int(nearbyint(xpos)) > width)
+        xpos = -srcRect.w;
+    if(int(nearbyint(xpos)) < -srcRect.w)
+        xpos = width;
 
-    //stay on screen
-    if(int(nearbyint(xpos)) > 800) {
-        xpos = 0;
-    }
-    if(int(nearbyint(xpos)) < 0) {
-        xpos = 800;
-    }
     ypos += yvel + fallvel;
-    if(int(nearbyint(ypos)) > 600) {
-        ypos = 0;
-    }
-
-    destRect.x = int(nearbyint(xpos));
-    destRect.y = int(nearbyint(ypos));
-}
-
-void GameObject::Render() {
-    SDL_RenderCopy(Game::renderer, objTexture->getTexture(), &srcRect, &destRect);
+    if(int(nearbyint(ypos)) < -srcRect.h)
+        ypos = height;
 }
 
 void GameObject::SetScale(int scale) {

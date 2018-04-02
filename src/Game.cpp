@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include "Game.h"
 #include "GameObject.h"
 #include "TextureManager.h"
@@ -13,6 +13,7 @@ Map* map;
 TextureManager* playerTex;
 
 SDL_Renderer *Game::renderer = nullptr;
+SDL_Window *Game::window = nullptr;
 double Game::FPS = 144;
 
 // Initializes the game class (what happens upon creation)

@@ -2,7 +2,6 @@
 // Created by Philipp on 30.03.2018.
 //
 
-#include <iostream>
 #include "TextureManager.h"
 
 
