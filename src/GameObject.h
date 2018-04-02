@@ -24,6 +24,8 @@ public:
     void add_fallvel(double jumpvel);
     void SetScale(int scale);
     double GetScale() {return scale; };
+    bool d_pressed = false;
+    bool a_pressed = false;
 
 
 

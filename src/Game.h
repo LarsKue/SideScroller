@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <cstdio>
+#include <ctime>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -17,14 +18,14 @@ public:
     void update();
     void render();
     void clean();
-
     bool running() { return isRunning; };
 
     static SDL_Renderer *renderer;
-
+    static double FPS;
 
 
 private:
+
     int width;
     int height;
     bool fullscreen = false;

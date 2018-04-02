@@ -3,6 +3,7 @@
 //
 
 #include "GameObject.h"
+#include <iostream>
 
 GameObject::GameObject(TextureManager* texture, double x, double y, int scale) {
     objTexture = texture;
@@ -24,9 +25,10 @@ void GameObject::Update() {
     destRect.h = int(nearbyint(srcRect.h*scale));
     destRect.w = int(nearbyint(srcRect.w*scale));
 
-
+    //stop falling when you hit the ground
     if(ypos < 350 + destRect.h) {
-        fallvel += 9.81 * this->scale/144;
+        fallvel += 14.4 / Game::FPS;
+        std::cout << Game::FPS << std::endl;
         isOnGround = false;
     }
     if(ypos > 350 + destRect.h) {
@@ -37,8 +39,63 @@ void GameObject::Update() {
     if(ypos == 350 + destRect.h) {
         isOnGround = true;
     }
+    if(a_pressed) {
+        if(isOnGround) {
+            add_walkvel(-3);
+        }
+        else {
+            add_walkvel(-0.1);
+        }
+    }
+    if(d_pressed) {
+        if(isOnGround) {
+            add_walkvel(3);
+        }
+        else {
+            add_walkvel(0.1);
+        }
+    }
+    // if no keys are pressed, the character slowly loses speed
+    if(!d_pressed and !a_pressed) {
+        if(walkvel > 0) {
+            if(isOnGround) {
+                if(walkvel > 1) {
+                    walkvel -= 1;
+                }
+                else {
+                    walkvel = 0;
+                }
+            }
+            else {
+                if (walkvel > 0.1) {
+                    walkvel -= 0.1;
+                } else {
+                    walkvel = 0;
+                }
+            }
+        }
+        else if(walkvel < 0) {
+            if(isOnGround) {
+                if(walkvel < -1) {
+                    walkvel += 1;
+                }
+                else {
+                    walkvel = 0;
+                }
+            }
+            else {
+                if (walkvel < -0.1) {
+                    walkvel += 0.1;
+                } else {
+                    walkvel = 0;
+                }
+            }
+        }
+    }
 
     xpos += xvel + walkvel;
+
+    //stay on screen
     if(int(nearbyint(xpos)) > 800) {
         xpos = 0;
     }

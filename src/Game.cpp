@@ -13,6 +13,7 @@ Map* map;
 TextureManager* playerTex;
 
 SDL_Renderer *Game::renderer = nullptr;
+double Game::FPS = 144;
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -88,15 +89,14 @@ void Game::handleEvents() {
                     printf("DOWN\n");
                     break;
                 case SDLK_d:
-                    player->add_walkvel(3 * player->GetScale());
+                    player->d_pressed = true;
                     break;
                 case SDLK_a:
-                    player->add_walkvel(-3 * player->GetScale());
+                    player->a_pressed = true;
                     break;
                 case SDLK_SPACE:
-                    if(player->isOnGround) {
+                    if(player->isOnGround)
                         player->add_fallvel(-2 * player->GetScale());
-                    }
                     break;
                 default:
                     break;
@@ -119,10 +119,10 @@ void Game::handleEvents() {
                     printf("DOWN\n");
                     break;
                 case SDLK_d:
-                    player->add_walkvel(-3 * player->GetScale());
+                    player->d_pressed = false;
                     break;
                 case SDLK_a:
-                    player->add_walkvel(3 * player->GetScale());
+                    player->a_pressed = false;
                     break;
                 case SDLK_SPACE:
                     break;

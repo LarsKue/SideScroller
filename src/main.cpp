@@ -7,10 +7,13 @@ using namespace std;
 
 Game *game = nullptr;
 
-const int FPS = 144;
-const int frameDelay = 1000 / FPS;
+const int maxFps = 144;
+const int frameDelay = 1000 / maxFps;
+
+
 
 int main(int argc, char** argv) {
+
     Uint32 frameStart;
     int frameTime;
 
@@ -28,10 +31,14 @@ int main(int argc, char** argv) {
         game->update();
         game->render();
 
-        // Calculate time it took to complete one game frame and delay it until it matches the FPS
+        // Calculate time it took to complete one game frame and delay it until it matches the max maxFps
         frameTime = SDL_GetTicks() - frameStart;
+//        Game::frameTime = frameTime;
+//        Game::frameDelay = frameDelay;
         if (frameDelay > frameTime)
             SDL_Delay(frameDelay - frameTime);
+        Game::FPS = 1000.0/(SDL_GetTicks() - frameStart);
+
     }
 
     // Cleans and stops the program
