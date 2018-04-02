@@ -87,9 +87,41 @@ void Game::handleEvents() {
                 case SDLK_DOWN:
                     printf("DOWN\n");
                     break;
+                case SDLK_d:
+                    player->add_xvel(3);
+                    break;
+                case SDLK_a:
+                    player->add_xvel(-3);
+                    break;
+                case SDLK_SPACE:
+                    break;
             }
             break;
-
+        case SDL_KEYUP:
+            // These are the keyboard presses
+            cout << SDL_GetKeyName( event.key.keysym.sym ) << endl;
+            switch (event.key.keysym.sym) {
+                case SDLK_LEFT:
+                    printf("LEFT\n");
+                    break;
+                case SDLK_RIGHT:
+                    printf("RIGHT\n");
+                    break;
+                case SDLK_UP:
+                    printf("UP\n");
+                    break;
+                case SDLK_DOWN:
+                    printf("DOWN\n");
+                    break;
+                case SDLK_d:
+                    player->add_xvel(-3);
+                    break;
+                case SDLK_a:
+                    player->add_xvel(3);
+                    break;
+                case SDLK_SPACE:
+                    break;
+            }
         default:
             break;
     }
