@@ -8,6 +8,7 @@
 
 class GameObject {
 public:
+    bool isOnGround;
     GameObject(TextureManager* texture, double x, double y, int scale);
     ~GameObject();
 
@@ -17,18 +18,28 @@ public:
     void add_yvel(double yvel);
     void set_xvel(double xvel);
     void set_yvel(double yvel);
-    void Jump();
+    void set_walkvel(double walkvel);
+    void set_jumpvel(double jumpvel);
+    void add_walkvel(double walkvel);
+    void add_fallvel(double jumpvel);
     void SetScale(int scale);
+    double GetScale() {return scale; };
 
 
 
 private:
+    double scale;
     double xvel;
     double yvel;
+    double walkvel;
+    double max_walkvel;
+    double min_walkvel;
+    double fallvel;
     double xpos;
     double ypos;
 
-    double scale;
+
+
 
     TextureManager *objTexture;
     SDL_Rect srcRect, destRect;

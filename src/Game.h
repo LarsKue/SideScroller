@@ -21,15 +21,16 @@ public:
     bool running() { return isRunning; };
 
     static SDL_Renderer *renderer;
-    static SDL_Window *window;
-    static int width;
-    static int height;
+
+
 
 private:
-
+    int width;
+    int height;
     bool fullscreen = false;
     int cnt = 0;
     bool isRunning;
+    SDL_Window *window;
 };
 
 #endif

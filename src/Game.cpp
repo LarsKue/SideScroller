@@ -53,7 +53,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     playerTex = new TextureManager("assets/player.png");
 
-    player = new GameObject(playerTex, 0, 0, 1);
+    player = new GameObject(playerTex, 50, 50, 2);
     player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
 
@@ -88,12 +88,17 @@ void Game::handleEvents() {
                     printf("DOWN\n");
                     break;
                 case SDLK_d:
-                    player->add_xvel(3);
+                    player->add_walkvel(3 * player->GetScale());
                     break;
                 case SDLK_a:
-                    player->add_xvel(-3);
+                    player->add_walkvel(-3 * player->GetScale());
                     break;
                 case SDLK_SPACE:
+                    if(player->isOnGround) {
+                        player->add_fallvel(-2 * player->GetScale());
+                    }
+                    break;
+                default:
                     break;
             }
             break;
@@ -114,12 +119,14 @@ void Game::handleEvents() {
                     printf("DOWN\n");
                     break;
                 case SDLK_d:
-                    player->add_xvel(-3);
+                    player->add_walkvel(-3 * player->GetScale());
                     break;
                 case SDLK_a:
-                    player->add_xvel(3);
+                    player->add_walkvel(3 * player->GetScale());
                     break;
                 case SDLK_SPACE:
+                    break;
+                default:
                     break;
             }
         default:
@@ -140,7 +147,7 @@ void Game::render() {
     // add stuff to render here
     map->DrawMap();
     player->Render();
-    player2->Render();
+//    player2->Render();
 
     SDL_RenderPresent(renderer);
 }
