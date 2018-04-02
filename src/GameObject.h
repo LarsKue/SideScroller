@@ -22,14 +22,25 @@ public:
     void set_jumpvel(double jumpvel);
     void add_walkvel(double walkvel);
     void add_fallvel(double jumpvel);
+
     void SetScale(int scale);
     double GetScale() {return scale; };
+    void SetSpeed_mult(double speed);
+    double GetSpeed_mult() {return speed; };
+    void SetAccel_mult(double accel);
+    double GetAccel_mult() {return accel; };
+    void SetGrav(double grav);
+    double GetGrav() {return grav; };
+
     bool d_pressed = false;
     bool a_pressed = false;
 
 
 
 private:
+    double grav = 1;
+    double accel = 1;
+    double speed = 1;
     double scale;
     double xvel;
     double yvel;

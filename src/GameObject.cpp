@@ -27,8 +27,7 @@ void GameObject::Update() {
 
     //stop falling when you hit the ground
     if(ypos < 350 + destRect.h) {
-        fallvel += 14.4 / Game::FPS;
-        std::cout << Game::FPS << std::endl;
+        fallvel += 14.4 * grav / Game::FPS;
         isOnGround = false;
     }
     if(ypos > 350 + destRect.h) {
@@ -41,34 +40,34 @@ void GameObject::Update() {
     }
     if(a_pressed) {
         if(isOnGround) {
-            add_walkvel(-3);
+            add_walkvel(-300 * accel/Game::FPS);
         }
         else {
-            add_walkvel(-0.1);
+            add_walkvel(-14.4 * accel/Game::FPS);
         }
     }
     if(d_pressed) {
         if(isOnGround) {
-            add_walkvel(3);
+            add_walkvel(300 * accel/Game::FPS);
         }
         else {
-            add_walkvel(0.1);
+            add_walkvel(14.4 * accel/Game::FPS);
         }
     }
     // if no keys are pressed, the character slowly loses speed
     if(!d_pressed and !a_pressed) {
         if(walkvel > 0) {
             if(isOnGround) {
-                if(walkvel > 1) {
-                    walkvel -= 1;
+                if(walkvel > 144/Game::FPS) {
+                    walkvel -= 144/Game::FPS;
                 }
                 else {
                     walkvel = 0;
                 }
             }
             else {
-                if (walkvel > 0.1) {
-                    walkvel -= 0.1;
+                if (walkvel > 14.4/Game::FPS) {
+                    walkvel -= 14.4/Game::FPS;
                 } else {
                     walkvel = 0;
                 }
@@ -76,16 +75,16 @@ void GameObject::Update() {
         }
         else if(walkvel < 0) {
             if(isOnGround) {
-                if(walkvel < -1) {
-                    walkvel += 1;
+                if(walkvel < -144/Game::FPS) {
+                    walkvel += 144/Game::FPS;
                 }
                 else {
                     walkvel = 0;
                 }
             }
             else {
-                if (walkvel < -0.1) {
-                    walkvel += 0.1;
+                if (walkvel < -14.4/Game::FPS) {
+                    walkvel += 14.4/Game::FPS;
                 } else {
                     walkvel = 0;
                 }
@@ -93,7 +92,7 @@ void GameObject::Update() {
         }
     }
 
-    xpos += xvel + walkvel;
+    xpos += xvel + walkvel * speed;
 
     //stay on screen
     if(int(nearbyint(xpos)) > 800) {
@@ -155,4 +154,16 @@ void GameObject::add_walkvel(double walkvel) {
 
 void GameObject::add_fallvel(double jumpvel) {
     this->fallvel += jumpvel;
+}
+
+void GameObject::SetSpeed_mult(double speed) {
+    this->speed = speed;
+}
+
+void GameObject::SetAccel_mult(double accel) {
+    this->accel = accel;
+}
+
+void GameObject::SetGrav(double grav) {
+    this->grav = grav;
 }
