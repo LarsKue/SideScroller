@@ -7,8 +7,6 @@
 #include "ECS.h"
 #include "Components.h"
 
-using namespace std;
-
 GameObject* player;
 GameObject* player2;
 Map* map;
@@ -41,17 +39,17 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     // Sets up the window and opens it
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-        cout << "Subsystems initialized!" << endl;
+        printf("Subsystems initialized!");
 
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         if (window) {
-            cout << "Window created!" << endl;
+            printf( "Window created!");
         }
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
             SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-            cout << "Renderer created!" << endl;
+            printf( "Renderer created!");
         }
 
         cnt = (width / 2 - 100) * 20;
@@ -80,7 +78,7 @@ void Game::handleEvents() {
 
         case SDL_KEYDOWN:
             // These are the keyboard presses
-            cout << SDL_GetKeyName( event.key.keysym.sym ) << endl;
+            printf( SDL_GetKeyName( event.key.keysym.sym ));
             switch (event.key.keysym.sym) {
                 case SDLK_ESCAPE:
                     isRunning = false;
@@ -112,7 +110,7 @@ void Game::handleEvents() {
             break;
         case SDL_KEYUP:
             // These are the keyboard presses
-            cout << SDL_GetKeyName( event.key.keysym.sym ) << endl;
+            printf( SDL_GetKeyName( event.key.keysym.sym ));
             switch (event.key.keysym.sym) {
                 case SDLK_LEFT:
                     printf("LEFT\n");
@@ -150,8 +148,7 @@ void Game::update() {
     player->Update();
     player2->Update();
     manager.update();
-    cout << newPlayer.getComponent<PositionComponent>().x() << "," <<
-            newPlayer.getComponent<PositionComponent>().y() << endl;
+    printf(newPlayer.getComponent<PositionComponent>().x() + "," + newPlayer.getComponent<PositionComponent>().y());
 }
 
 // This is what get's rendered every frame
@@ -171,5 +168,5 @@ void Game::clean() {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
-    cout << "Game cleaned" << endl;
+    printf( "Game cleaned");
 }

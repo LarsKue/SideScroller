@@ -3,8 +3,6 @@
 #include "SDL2/SDL.h"
 #include "Game.h"
 
-using namespace std;
-
 Game *game = nullptr;
 
 const int maxFps = 144;

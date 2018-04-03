@@ -30,3 +30,20 @@ add_custom_command(
         TARGET SideScroller POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E
         copy_directory ${CMAKE_SOURCE_DIR}/lib/dlls ${CMAKE_SOURCE_DIR}/cmake-build-debug)
+
+# release
+add_custom_command(
+        TARGET SideScroller PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E
+        remove_directory ${CMAKE_SOURCE_DIR}/cmake-build-release/assets)
+
+add_custom_command(
+        TARGET SideScroller POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E
+        copy_directory ${CMAKE_SOURCE_DIR}/assets ${CMAKE_SOURCE_DIR}/cmake-build-release/assets)
+
+# Copy libraries into build directory
+add_custom_command(
+        TARGET SideScroller POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E
+        copy_directory ${CMAKE_SOURCE_DIR}/lib/dlls ${CMAKE_SOURCE_DIR}/cmake-build-release)

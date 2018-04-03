@@ -9,12 +9,10 @@
 #include <bitset>
 #include <array>
 
-using namespace std;
-
 class Component;
 class Entity;
 
-using ComponentID = size_t;
+using ComponentID = std::size_t;
 
 inline ComponentID getComponentTypeID(){
     static ComponentID lastID = 0;
@@ -26,10 +24,10 @@ template <typename T> inline ComponentID getComponentTypeID() noexcept{
     return typeID;
 }
 
-constexpr size_t maxComponents = 32;
+constexpr std::size_t maxComponents = 32;
 
-using ComponentBitSet = bitset<maxComponents>;
-using ComponentArray = array<Component*, maxComponents>;
+using ComponentBitSet = std::bitset<maxComponents>;
+using ComponentArray = std::array<Component*, maxComponents>;
 
 
 class Component{
@@ -46,7 +44,7 @@ public:
 class Entity {
 private:
     bool active = true;
-    vector<unique_ptr<Component>> components;
+    std::vector<std::unique_ptr<Component>> components;
 
     ComponentArray componentArray;
     ComponentBitSet componentBitSet;
@@ -65,11 +63,10 @@ public:
         return componentBitSet[getComponentTypeID<T>];
     }
 
-    template <typename T, typename... TArgs>
-    T& addComponent(TArgs&&... mArgs) {
-        T* c(new T(forward<TArgs>(mArgs)...));
+    template <typename T, typename... TArgs> T& addComponent(TArgs&&... mArgs) {
+        T* c(new T(std::forward<TArgs>(mArgs)...));
         c->entity = this;
-        unique_ptr<Component> uPtr{ c };
+        std::unique_ptr<Component> uPtr{ c };
         components.emplace_back(move(uPtr));
 
         componentArray[getComponentTypeID<T>()] = c;
@@ -88,7 +85,7 @@ public:
 
 class Manager{
 private:
-    vector<unique_ptr<Entity>> entities;
+    std::vector<std::unique_ptr<Entity>> entities;
 
 public:
     void update(){
@@ -99,16 +96,16 @@ public:
     }
 
     void refresh(){
-        entities.erase(remove_if(begin(entities), end(entities),
-                                      [](const unique_ptr<Entity> &mEntity){
+        entities.erase(std::remove_if(std::begin(entities), std::end(entities),
+                                      [](const std::unique_ptr<Entity> &mEntity){
             return !mEntity->isActive();
         }),
-                       end(entities));
+                       std::end(entities));
     }
 
     Entity& addEntity() {
         Entity* e = new Entity();
-        unique_ptr<Entity> uPtr{ e };
+        std::unique_ptr<Entity> uPtr{ e };
         entities.emplace_back(move(uPtr));
         return *e;
     };
