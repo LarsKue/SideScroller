@@ -15,9 +15,21 @@ private:
     TextureManager *texture;
     SDL_Rect srcRect, destRect;
 
+    bool animated = false;
+    int frames = 0;
+    int delay = 100;
+
 public:
+
     SpriteComponent() = default;
     SpriteComponent(const char* path) {
+        texture = new TextureManager(path);
+    }
+
+    SpriteComponent(const char* path, int nFrames, int mDelay) {
+        animated = true;
+        frames = nFrames;
+        delay = mDelay;
         texture = new TextureManager(path);
     }
 
@@ -32,14 +44,20 @@ public:
         srcRect.x = 0;
         srcRect.y = 0;
         srcRect.w = 32;
-        srcRect.h = 64;
+        srcRect.h = 32;
 
-        destRect.w = 32;
-        destRect.h = 64;
+        destRect.w = 32 * 6;
+        destRect.h = 32 * 6;
 
     }
 
     void update() override {
+
+        // scrolls through the frames in the source image
+        if (animated) {
+            srcRect.y = srcRect.h * static_cast<int> ((SDL_GetTicks() / delay) % frames);
+        }
+
         destRect.x = position->x();
         destRect.y = position->y();
     }

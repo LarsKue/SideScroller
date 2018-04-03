@@ -14,7 +14,7 @@ double Game::FPS = 144;
 
 Manager manager;
 auto& newPlayer(manager.addEntity());
-auto& healthbar(manager.addEntity());
+auto& water(manager.addEntity());
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -62,10 +62,11 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     //ecs implementation
 
     newPlayer.addComponent<PositionComponent>();
-    healthbar.addComponent<PositionComponent>();
+    water.addComponent<PositionComponent>();
+    water.getComponent<PositionComponent>().setPos(1700, 500);
 
     newPlayer.addComponent<SpriteComponent>("assets/player.png");
-    healthbar.addComponent<SpriteComponent>("assets/gui.png");
+    water.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
 
 }
 
@@ -150,8 +151,8 @@ void Game::handleEvents() {
 void Game::update() {
     manager.refresh();
     manager.update();
-    std::cout <<    newPlayer.getComponent<PositionComponent>().x() << "," <<
-                    newPlayer.getComponent<PositionComponent>().y() << std::endl;
+    std::cout <<    water.getComponent<PositionComponent>().x() << "," <<
+                    water.getComponent<PositionComponent>().y() << std::endl;
 }
 
 // This is what gets rendered every frame
