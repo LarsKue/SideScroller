@@ -1,11 +1,11 @@
 //
-// Created by Philipp on 03.04.2018.
+// Created by Lars on 03/04/2018.
 //
 
-#ifndef COMPONENTS_H
-#define COMPONENTS_H
+#ifndef SIDESCROLLER_POSITIONCOMPONENT_H
+#define SIDESCROLLER_POSITIONCOMPONENT_H
 
-#include "ECS.h"
+#include "Components.h"
 
 class PositionComponent : public Component {
 private:
@@ -13,6 +13,16 @@ private:
     int ypos;
 
 public:
+
+    PositionComponent() {
+        xpos = 0;
+        ypos = 0;
+    }
+
+    PositionComponent(int x, int y) {
+        xpos = x;
+        ypos = y;
+    }
     int x() { return xpos; }
     int y() { return ypos; }
 
@@ -33,5 +43,4 @@ public:
 
 };
 
-
-#endif //SIDESCROLLER_COMPONENTS_H
+#endif //SIDESCROLLER_POSITIONCOMPONENT_H

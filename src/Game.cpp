@@ -1,14 +1,9 @@
 
 #include "Game.h"
-#include "GameObject.h"
 #include "TextureManager.h"
 #include "Map.h"
+#include "ECS/Components.h"
 
-#include "ECS.h"
-#include "Components.h"
-
-GameObject* player;
-GameObject* player2;
 Map* map;
 
 TextureManager* playerTex;
@@ -59,11 +54,16 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     playerTex = new TextureManager("assets/player.png");
 
-    player = new GameObject(playerTex, 50, 50, 2);
-    player2 = new GameObject(playerTex, 50, 50, 1);
+//    player = new GameObject(playerTex, 50, 50, 2);
+//    player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
 
     newPlayer.addComponent<PositionComponent>();
+
+    //ecs implementation
+
+    newPlayer.addComponent<PositionComponent>();
+    newPlayer.addComponent<SpriteComponent>("assets/player.png");
 
 }
 
@@ -95,15 +95,15 @@ void Game::handleEvents() {
                 case SDLK_DOWN:
                     printf("DOWN\n");
                     break;
-                case SDLK_d:
-                    player->d_pressed = true;
-                    break;
-                case SDLK_a:
-                    player->a_pressed = true;
-                    break;
-                case SDLK_SPACE:
-                    player->space_pressed = true;
-                    break;
+//                case SDLK_d:
+//                    player->d_pressed = true;
+//                    break;
+//                case SDLK_a:
+//                    player->a_pressed = true;
+//                    break;
+//                case SDLK_SPACE:
+//                    player->space_pressed = true;
+//                    break;
                 default:
                     break;
             }
@@ -124,17 +124,17 @@ void Game::handleEvents() {
                 case SDLK_DOWN:
                     printf("DOWN\n");
                     break;
-                case SDLK_d:
-                    player->d_pressed = false;
-                    break;
-                case SDLK_a:
-                    player->a_pressed = false;
-                    break;
-                case SDLK_SPACE:
-                    player->space_pressed = false;
-                    player->jumped = false;
-                    player->jumpadd = false;
-                    break;
+//                case SDLK_d:
+//                    player->d_pressed = false;
+//                    break;
+//                case SDLK_a:
+//                    player->a_pressed = false;
+//                    break;
+//                case SDLK_SPACE:
+//                    player->space_pressed = false;
+//                    player->jumped = false;
+//                    player->jumpadd = false;
+//                    break;
                 default:
                     break;
             }
@@ -145,8 +145,9 @@ void Game::handleEvents() {
 
 // This is what happens every frame
 void Game::update() {
-    player->Update();
-    player2->Update();
+//    player->Update();
+//    player2->Update();
+    manager.refresh();
     manager.update();
     std::cout <<    newPlayer.getComponent<PositionComponent>().x() << "," <<
                     newPlayer.getComponent<PositionComponent>().y() << std::endl;
@@ -158,8 +159,9 @@ void Game::render() {
 
     // add stuff to render here
     map->DrawMap();
-    player->Render();
+//    player->Render();
 //    player2->Render();
+    manager.draw();
 
     SDL_RenderPresent(renderer);
 }
