@@ -2,11 +2,14 @@
 #define ECS_H
 
 #include <iostream>
+#include <cstddef>
 #include <vector>
 #include <memory>
 #include <algorithm>
 #include <bitset>
 #include <array>
+
+using namespace std;
 
 class Component;
 class Entity;
@@ -26,7 +29,7 @@ template <typename T> inline ComponentID getComponentTypeID() noexcept{
 constexpr size_t maxComponents = 32;
 
 using ComponentBitSet = bitset<maxComponents>;
-using ComonentArray = array<Component*, maxComponents>;
+using ComponentArray = array<Component*, maxComponents>;
 
 class Component{
 public:
@@ -60,10 +63,11 @@ public:
         return componentBitSet[getComponentTypeID<T>];
     }
 
-    template <typename T, typename... TArgs> t& addComponent(TArgs&&... mArgs) {
-        t* c(new T(forward<TArgs>(mArgs)));
+    template <typename T, typename... TArgs>
+    T& addComponent(TArgs&&... mArgs) {
+        T* c(new T(forward<TArgs>(mArgs)...));
         c->entity = this;
-        unique_ptr<Component> uPts{ c };
+        unique_ptr<Component> uPtr{ c };
         components.emplace_back(move(uPtr));
 
         componentArray[getComponentTypeID<T>()] = c;
