@@ -11,6 +11,10 @@ TextureManager::TextureManager(const char *filePath) {
         std::cerr << "Could not load image! Error: " << IMG_GetError() << std::endl;
 }
 
+void TextureManager::setTexture(const char* filePath) {
+    texture = IMG_LoadTexture(Game::renderer, filePath);
+}
+
 SDL_Texture* TextureManager::getTexture() {
     return texture;
 }

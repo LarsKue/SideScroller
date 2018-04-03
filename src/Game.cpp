@@ -14,6 +14,7 @@ double Game::FPS = 144;
 
 Manager manager;
 auto& newPlayer(manager.addEntity());
+auto& healthbar(manager.addEntity());
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -58,12 +59,13 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 //    player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
 
-    newPlayer.addComponent<PositionComponent>();
-
     //ecs implementation
 
     newPlayer.addComponent<PositionComponent>();
+    healthbar.addComponent<PositionComponent>();
+
     newPlayer.addComponent<SpriteComponent>("assets/player.png");
+    healthbar.addComponent<SpriteComponent>("assets/gui.png");
 
 }
 
@@ -84,6 +86,7 @@ void Game::handleEvents() {
                     isRunning = false;
                     break;
                 case SDLK_LEFT:
+                    newPlayer.getComponent<SpriteComponent>().setTex("assets/playertest.png");
                     printf("LEFT\n");
                     break;
                 case SDLK_RIGHT:
@@ -145,22 +148,19 @@ void Game::handleEvents() {
 
 // This is what happens every frame
 void Game::update() {
-//    player->Update();
-//    player2->Update();
     manager.refresh();
     manager.update();
     std::cout <<    newPlayer.getComponent<PositionComponent>().x() << "," <<
                     newPlayer.getComponent<PositionComponent>().y() << std::endl;
 }
 
-// This is what get's rendered every frame
+// This is what gets rendered every frame
 void Game::render() {
     SDL_RenderClear(renderer);
 
     // add stuff to render here
+    // remember layer order (lowest should be drawn first)
     map->DrawMap();
-//    player->Render();
-//    player2->Render();
     manager.draw();
 
     SDL_RenderPresent(renderer);

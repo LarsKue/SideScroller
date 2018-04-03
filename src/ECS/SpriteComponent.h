@@ -21,6 +21,10 @@ public:
         texture = new TextureManager(path);
     }
 
+    void setTex(const char* path) {
+        texture->setTexture(path);
+    }
+
     void init() override {
 
         position = &entity->getComponent<PositionComponent>();

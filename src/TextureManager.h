@@ -8,7 +8,7 @@ class TextureManager {
 
 public:
     TextureManager(const char *filePath);
-
+    void setTexture(const char* filePath);
     SDL_Texture *getTexture();
 
     void Draw(SDL_Rect src, SDL_Rect dest);
