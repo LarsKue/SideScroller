@@ -55,7 +55,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     playerTex = new TextureManager("assets/player.png");
 
-    player = new GameObject(playerTex, 50, 50, 1);
+    player = new GameObject(playerTex, 50, 50, 2);
     player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
 
@@ -126,6 +126,8 @@ void Game::handleEvents() {
                     break;
                 case SDLK_SPACE:
                     player->space_pressed = false;
+                    player->jumped = false;
+                    player->jumpadd = false;
                     break;
                 default:
                     break;

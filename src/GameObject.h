@@ -19,9 +19,11 @@ public:
     void set_xvel(double xvel);
     void set_yvel(double yvel);
     void set_walkvel(double walkvel);
-    void set_jumpvel(double jumpvel);
+    void set_fallvel(double fallvel);
     void add_walkvel(double walkvel);
-    void add_fallvel(double jumpvel);
+    void add_fallvel(double fallvel);
+    void set_jumpvel(double jumpvel);
+    void add_jumpvel(double jumpvel);
 
     void SetScale(int scale);
     double GetScale() {return scale; };
@@ -35,23 +37,27 @@ public:
     bool d_pressed = false;
     bool a_pressed = false;
     bool space_pressed = false;
+    bool jumped = false;
+    bool jumpadd = false;
 
 
 
 private:
     //parameter multipliers
-    double grav = 1;
-    double accel = 1;
-    double speed = 1;
+    double grav = 2;
+    double accel = 1.25;
+    double speed = 1.25;
     double scale;
 
     //movement variables
-    double xvel;
-    double yvel;
-    double walkvel;
+    double xvel = 0;
+    double yvel = 0;
+    double fallvel = 0;
+    double walkvel = 0;
+    double jumpvel = 0;
     double max_walkvel;
     double min_walkvel;
-    double fallvel;
+    double max_jumpvel;
     double xpos;
     double ypos;
 
