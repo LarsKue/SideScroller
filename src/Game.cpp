@@ -15,6 +15,8 @@ double Game::FPS = 144;
 Manager manager;
 auto& newPlayer(manager.addEntity());
 auto& water(manager.addEntity());
+auto& water2(manager.addEntity());
+auto& water3(manager.addEntity());
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -63,10 +65,17 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     newPlayer.addComponent<PositionComponent>();
     water.addComponent<PositionComponent>();
-    water.getComponent<PositionComponent>().setPos(1700, 500);
+    water.getComponent<PositionComponent>().setPos(1400, 500);
+    water2.addComponent<PositionComponent>();
+    water3.addComponent<PositionComponent>();
+    water2.getComponent<PositionComponent>().setPos(1208, 500);
+    water3.getComponent<PositionComponent>().setPos(1592, 500);
 
     newPlayer.addComponent<SpriteComponent>("assets/player.png");
     water.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
+    water2.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
+    water.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
+
 
 }
 
