@@ -148,7 +148,8 @@ void Game::update() {
     player->Update();
     player2->Update();
     manager.update();
-    printf(newPlayer.getComponent<PositionComponent>().x() + "," + newPlayer.getComponent<PositionComponent>().y());
+    std::cout <<    newPlayer.getComponent<PositionComponent>().x() << "," <<
+                    newPlayer.getComponent<PositionComponent>().y() << std::endl;
 }
 
 // This is what get's rendered every frame
