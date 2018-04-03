@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "Map.h"
+#include "ECS.h"
+#include "Components.h"
 
 using namespace std;
 
@@ -15,6 +17,9 @@ TextureManager* playerTex;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Window *Game::window = nullptr;
 double Game::FPS = 144;
+
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -58,6 +63,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     player = new GameObject(playerTex, 50, 50, 2);
     player2 = new GameObject(playerTex, 50, 50, 1);
     map = new Map();
+
+    newPlayer.addComponent<PositionComponent>();
 
 }
 
@@ -141,6 +148,7 @@ void Game::handleEvents() {
 void Game::update() {
     player->Update();
     player2->Update();
+    manager.update();
 }
 
 // This is what get's rendered every frame
