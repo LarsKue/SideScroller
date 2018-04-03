@@ -31,6 +31,7 @@ constexpr size_t maxComponents = 32;
 using ComponentBitSet = bitset<maxComponents>;
 using ComponentArray = array<Component*, maxComponents>;
 
+
 class Component{
 public:
     Entity* entity;
@@ -40,6 +41,7 @@ public:
 
     virtual ~Component() {};
 };
+
 
 class Entity {
 private:
@@ -81,8 +83,8 @@ public:
         auto ptr(componentArray[getComponentTypeID<T>()]);
         return *static_cast<T*>(ptr);
     }
-
 };
+
 
 class Manager{
 private:

@@ -1,4 +1,7 @@
+#include <cmath>
 #include "GameObject.h"
+
+using namespace std;
 
 GameObject::GameObject(TextureManager* texture, double x, double y, int scale) {
     objTexture = texture;
@@ -9,7 +12,7 @@ GameObject::GameObject(TextureManager* texture, double x, double y, int scale) {
     this->scale = scale;
     this->max_walkvel = 1 * this->scale;
     this->min_walkvel = -1 * this->scale;
-    this->max_jumpvel = 4 * this->scale;
+    this->max_jumpvel = 6 * this->scale;
 }
 
 void GameObject::Update() {
@@ -56,12 +59,11 @@ void GameObject::handleMovement() {
     if (space_pressed) {
         if (isOnGround and !jumped) {
             add_jumpvel(2 * scale);
-            std::cout << "debug" << std::endl;
             jumped = true;
             jumpadd = false;
         }
         if (jumpvel < max_jumpvel and !jumpadd) {
-            add_jumpvel(0.3);
+            add_jumpvel(0.25);
         }
     }
 
@@ -127,7 +129,6 @@ void GameObject::handleMovement() {
 
     if (int(nearbyint(ypos)) < -srcRect.h)
         ypos = height;
-    std::cout << "Walk velocity: " << walkvel << std::endl;
 }
 
 void GameObject::SetScale(int scale) {

@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 #include "Map.h"
+
 #include "ECS.h"
 #include "Components.h"
 
@@ -49,7 +50,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 100, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
             cout << "Renderer created!" << endl;
         }
 
@@ -149,6 +150,8 @@ void Game::update() {
     player->Update();
     player2->Update();
     manager.update();
+    cout << newPlayer.getComponent<PositionComponent>().x() << "," <<
+            newPlayer.getComponent<PositionComponent>().y() << endl;
 }
 
 // This is what get's rendered every frame
