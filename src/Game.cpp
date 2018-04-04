@@ -3,6 +3,7 @@
 #include "TextureManager.h"
 #include "Map.h"
 #include "ECS/Components.h"
+#include "Vector2D.h"
 
 Map* map;
 
@@ -71,27 +72,18 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     //ecs implementation
 
-    newPlayer.addComponent<PositionComponent>();
-    water1.addComponent<PositionComponent>();
-    water2.addComponent<PositionComponent>();
-    water3.addComponent<PositionComponent>();
-    water1.getComponent<PositionComponent>().setPos(1400, 100);
-    water2.getComponent<PositionComponent>().setPos(1208, 100);
-    water3.getComponent<PositionComponent>().setPos(1592, 100);
+    newPlayer.addComponent<TransformComponent>();
+    water1.addComponent<TransformComponent>(1400, 100);
+    water2.addComponent<TransformComponent>(1208, 100);
+    water3.addComponent<TransformComponent>(1592, 100);
 
-    water11.addComponent<PositionComponent>();
-    water12.addComponent<PositionComponent>();
-    water13.addComponent<PositionComponent>();
-    water11.getComponent<PositionComponent>().setPos(1400, 400);
-    water12.getComponent<PositionComponent>().setPos(1208, 400);
-    water13.getComponent<PositionComponent>().setPos(1592, 400);
+    water11.addComponent<TransformComponent>(1400, 400);
+    water12.addComponent<TransformComponent>(1208, 400);
+    water13.addComponent<TransformComponent>(1592, 400);
 
-    water21.addComponent<PositionComponent>();
-    water22.addComponent<PositionComponent>();
-    water23.addComponent<PositionComponent>();
-    water21.getComponent<PositionComponent>().setPos(1400, 800);
-    water22.getComponent<PositionComponent>().setPos(1208, 800);
-    water23.getComponent<PositionComponent>().setPos(1592, 800);
+    water21.addComponent<TransformComponent>(1400, 800);
+    water22.addComponent<TransformComponent>(1208, 800);
+    water23.addComponent<TransformComponent>(1592, 800);
 
     newPlayer.addComponent<SpriteComponent>("assets/player.png");
     water1.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
@@ -190,8 +182,14 @@ void Game::handleEvents() {
 void Game::update() {
     manager.refresh();
     manager.update();
-    std::cout <<    water1.getComponent<PositionComponent>().x() << "," <<
-                    water1.getComponent<PositionComponent>().y() << std::endl;
+    std::cout <<    water1.getComponent<TransformComponent>().position.x << "," <<
+                    water1.getComponent<TransformComponent>().position.y << std::endl;
+
+    newPlayer.getComponent<TransformComponent>().position.Add(Vector2D(5,0));
+
+    if (newPlayer.getComponent<TransformComponent>().position.x > 500) {
+        newPlayer.getComponent<SpriteComponent>().setTex("assets/wateranimationtest02.png", 10, 100);
+    }
 }
 
 // This is what gets rendered every frame

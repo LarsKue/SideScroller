@@ -12,7 +12,7 @@
 
 class SpriteComponent : public Component {
 private:
-    PositionComponent *position;
+    TransformComponent *transform;
     TextureManager *texture;
     SDL_Rect srcRect, destRect;
 
@@ -28,14 +28,14 @@ public:
         texture = new TextureManager(path);
     }
 
-    SpriteComponent(const char* path, int nFrames, int mDelay) {
+    SpriteComponent(const char* path, int nFrames, double mDelay) {
         animated = true;
         frames = nFrames;
         delay = mDelay;
         texture = new TextureManager(path);
     }
 
-    SpriteComponent(const char* path, int nFrames, int mDelay, bool horizontal) {
+    SpriteComponent(const char* path, int nFrames, double mDelay, bool horizontal) {
         animated = true;
         frames = nFrames;
         delay = mDelay;
@@ -47,9 +47,24 @@ public:
         texture->setTexture(path);
     }
 
+    void setTex(const char* path, int nFrames, double mDelay) {
+        animated = true;
+        frames = nFrames;
+        delay = mDelay;
+        texture->setTexture(path);
+    }
+
+    void setTex(const char* path, int nFrames, double mDelay, bool horizontal) {
+        animated = true;
+        frames = nFrames;
+        delay = mDelay;
+        texture->setTexture(path);
+        this->horizontal = horizontal;
+    }
+
     void init() override {
 
-        position = &entity->getComponent<PositionComponent>();
+        transform = &entity->getComponent<TransformComponent>();
 
         srcRect.x = 0;
         srcRect.y = 0;
@@ -71,8 +86,8 @@ public:
                 srcRect.y = srcRect.h * static_cast<int> (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
         }
 
-        destRect.x = position->x();
-        destRect.y = position->y();
+        destRect.x = (int) transform->position.x;
+        destRect.y = (int) transform->position.y;
     }
 
     void draw() override {
