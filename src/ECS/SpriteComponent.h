@@ -5,6 +5,7 @@
 #include "SDL2/SDL.h"
 #include "../TextureManager.h"
 #include <cmath>
+#include <iostream>
 
 class SpriteComponent : public Component {
 private:
@@ -15,7 +16,7 @@ private:
     bool animated = false;
     int frames = 0;
     double delay = 100;
-    bool horizontal = false;
+    int offset = 1;
 
 public:
 
@@ -23,6 +24,11 @@ public:
 
     SpriteComponent(const char* path) {
         texture = new TextureManager(path);
+    }
+
+    SpriteComponent(const char* path, int offset) {
+        texture = new TextureManager(path);
+        this->offset = offset;
     }
 
     ~SpriteComponent() {
@@ -36,33 +42,30 @@ public:
         texture = new TextureManager(path);
     }
 
-    SpriteComponent(const char* path, int nFrames, double mDelay, bool horizontal) {
+    //SpriteComponents for Sprite Sheets
+    SpriteComponent(const char* path, int nFrames, double mDelay, int offset) {
         animated = true;
         frames = nFrames;
         delay = mDelay;
         texture = new TextureManager(path);
-        this->horizontal = horizontal;
+        this->offset = offset;
     }
 
     void init() override {
 
         transform = &entity->getComponent<TransformComponent>();
 
-        srcRect.x = 0;
-        srcRect.y = 0;
         srcRect.w = transform->width;
         srcRect.h = transform->height;
+        srcRect.x = srcRect.w * (offset - 1);
+        srcRect.y = 0;
     }
 
     void update() override {
 
-        // scrolls through the frames in the source image
-        if (animated) {
-            if (horizontal)
-                srcRect.x = srcRect.w * (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
-            else
-                srcRect.y = srcRect.h * (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
-        }
+    // scrolls through the frames in the source image
+        if(animated)
+            srcRect.y = srcRect.h * (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
 
         destRect.x = (int) transform->position.x;
         destRect.y = (int) transform->position.y;
@@ -85,12 +88,12 @@ public:
         delay = mDelay;
     }
 
-    void setTex(const char* path, int nFrames, double mDelay, bool horizontal) {
+    void setTex(const char* path, int nFrames, double mDelay, int offset) {
         texture->setTexture(path);
         animated = true;
         frames = nFrames;
         delay = mDelay;
-        this->horizontal = horizontal;
+        this->offset = offset;
     }
 
     SDL_Rect get_destRect() {

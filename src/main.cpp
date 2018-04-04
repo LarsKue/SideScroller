@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 
     // Initializing the game
     game = new Game();
-    game->init("SideScroller", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
+    game->init("SideScroller", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, false);
 
     // Game loop, keeps the game running
     while (game->running()) {

@@ -31,6 +31,24 @@ auto& water21(manager.addEntity());
 auto& water22(manager.addEntity());
 auto& water23(manager.addEntity());
 
+auto& water_601(manager.addEntity());
+auto& water_602(manager.addEntity());
+auto& water_603(manager.addEntity());
+
+auto& watertest(manager.addEntity());
+auto& watertest2(manager.addEntity());
+auto& watertest3(manager.addEntity());
+
+auto& statictest(manager.addEntity());
+auto& statictest2(manager.addEntity());
+auto& statictest3(manager.addEntity());
+auto& statictest4(manager.addEntity());
+auto& statictest5(manager.addEntity());
+auto& statictest6(manager.addEntity());
+auto& statictest7(manager.addEntity());
+auto& statictest8(manager.addEntity());
+auto& statictest9(manager.addEntity());
+
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
 
@@ -87,17 +105,17 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
 
     // Water Tests
-    water1.addComponent<TransformComponent>(1400, 100);
-    water2.addComponent<TransformComponent>(1208, 100);
-    water3.addComponent<TransformComponent>(1592, 100);
+    water1.addComponent<TransformComponent>(1400, 30, 32, 32, 3);
+    water2.addComponent<TransformComponent>(1208, 30, 32, 32, 3);
+    water3.addComponent<TransformComponent>(1592, 30, 32, 32, 3);
 
-    water11.addComponent<TransformComponent>(1400, 400);
-    water12.addComponent<TransformComponent>(1208, 400);
-    water13.addComponent<TransformComponent>(1592, 400);
+    water11.addComponent<TransformComponent>(1400, 150, 32, 32, 3);
+    water12.addComponent<TransformComponent>(1208, 150, 32, 32, 3);
+    water13.addComponent<TransformComponent>(1592, 150, 32, 32, 3);
 
-    water21.addComponent<TransformComponent>(1400, 800);
-    water22.addComponent<TransformComponent>(1208, 800);
-    water23.addComponent<TransformComponent>(1592, 800);
+    water21.addComponent<TransformComponent>(1400, 270, 32, 32, 3);
+    water22.addComponent<TransformComponent>(1208, 270, 32, 32, 3);
+    water23.addComponent<TransformComponent>(1592, 270, 32, 32, 3);
 
     water1.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
     water2.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
@@ -107,10 +125,45 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     water12.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
     water13.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
 
-    water21.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60, true);
-    water22.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60, true);
-    water23.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60, true);
+    water21.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60);
+    water22.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60);
+    water23.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60);
 
+
+    water_601.addComponent<TransformComponent>(1200, 390, 128, 32, 3);
+    water_602.addComponent<TransformComponent>(1008, 390, 128, 32, 3);
+    water_603.addComponent<TransformComponent>(1392, 390, 128, 32, 3);
+
+    water_601.addComponent<SpriteComponent>("assets/Wateranimation_60fps_01.png", 60, 1000/30);
+    water_602.addComponent<SpriteComponent>("assets/Wateranimation_60fps_01.png", 60, 1000/30);
+    water_603.addComponent<SpriteComponent>("assets/Wateranimation_60fps_01.png", 60, 1000/30);
+
+    watertest.addComponent<TransformComponent>(404, 500, 32, 32, 3);
+    watertest2.addComponent<TransformComponent>(500, 500, 32, 32, 3);
+    watertest3.addComponent<TransformComponent>(596, 500, 32, 32, 3);
+    watertest.addComponent<SpriteComponent>("assets/fluid animations.png", 16, 1000/16, 2);
+    watertest2.addComponent<SpriteComponent>("assets/fluid animations.png", 16, 1000/16, 2);
+    watertest3.addComponent<SpriteComponent>("assets/fluid animations.png", 16, 1000/16, 2);
+
+    statictest.addComponent<TransformComponent>(404, 596, 32, 32, 3);
+    statictest2.addComponent<TransformComponent>(500, 596, 32, 32, 3);
+    statictest3.addComponent<TransformComponent>(596, 596, 32, 32, 3);
+    statictest4.addComponent<TransformComponent>(404, 692, 32, 32, 3);
+    statictest5.addComponent<TransformComponent>(500, 692, 32, 32, 3);
+    statictest6.addComponent<TransformComponent>(596, 692, 32, 32, 3);
+    statictest7.addComponent<TransformComponent>(404, 788, 32, 32, 3);
+    statictest8.addComponent<TransformComponent>(500, 788, 32, 32, 3);
+    statictest9.addComponent<TransformComponent>(596, 788, 32, 32, 3);
+
+    statictest.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest2.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest3.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest4.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest5.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest6.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest7.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest8.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
+    statictest9.addComponent<SpriteComponent>("assets/fluid animations.png", 10);
 
 }
 
@@ -214,5 +267,5 @@ void Game::clean() {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
-    printf( "Game cleaned");
+    printf("Game cleaned");
 }
