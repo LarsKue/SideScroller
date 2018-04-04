@@ -18,6 +18,7 @@ private:
     bool animated = false;
     int frames = 0;
     int delay = 100;
+    bool horizontal = false;
 
 public:
 
@@ -31,6 +32,14 @@ public:
         frames = nFrames;
         delay = mDelay;
         texture = new TextureManager(path);
+    }
+
+    SpriteComponent(const char* path, int nFrames, int mDelay, bool horizontal) {
+        animated = true;
+        frames = nFrames;
+        delay = mDelay;
+        texture = new TextureManager(path);
+        this->horizontal = horizontal;
     }
 
     void setTex(const char* path) {
@@ -55,7 +64,10 @@ public:
 
         // scrolls through the frames in the source image
         if (animated) {
-            srcRect.y = srcRect.h * static_cast<int> ((SDL_GetTicks() / delay) % frames);
+            if (horizontal)
+                srcRect.x = srcRect.w * static_cast<int> ((SDL_GetTicks() / delay) % frames);
+            else
+                srcRect.y = srcRect.h * static_cast<int> ((SDL_GetTicks() / delay) % frames);
         }
 
         destRect.x = position->x();
@@ -65,7 +77,6 @@ public:
     void draw() override {
         texture->Draw(srcRect, destRect);
     }
-
 };
 
 #endif //SIDESCROLLER_SPRITECOMPONENT_H

@@ -14,9 +14,17 @@ double Game::FPS = 144;
 
 Manager manager;
 auto& newPlayer(manager.addEntity());
-auto& water(manager.addEntity());
+auto& water1(manager.addEntity());
 auto& water2(manager.addEntity());
 auto& water3(manager.addEntity());
+
+auto& water11(manager.addEntity());
+auto& water12(manager.addEntity());
+auto& water13(manager.addEntity());
+
+auto& water21(manager.addEntity());
+auto& water22(manager.addEntity());
+auto& water23(manager.addEntity());
 
 // Initializes the game class (what happens upon creation)
 Game::Game() {}
@@ -37,17 +45,17 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
     // Sets up the window and opens it
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-        printf("Subsystems initialized!");
+        printf("Subsystems initialized!\n");
 
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         if (window) {
-            printf( "Window created!");
+            printf( "Window created!\n");
         }
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
             SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-            printf( "Renderer created!");
+            printf( "Renderer created!\n");
         }
 
         cnt = (width / 2 - 100) * 20;
@@ -64,17 +72,39 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     //ecs implementation
 
     newPlayer.addComponent<PositionComponent>();
-    water.addComponent<PositionComponent>();
-    water.getComponent<PositionComponent>().setPos(1400, 500);
+    water1.addComponent<PositionComponent>();
     water2.addComponent<PositionComponent>();
     water3.addComponent<PositionComponent>();
-    water2.getComponent<PositionComponent>().setPos(1208, 500);
-    water3.getComponent<PositionComponent>().setPos(1592, 500);
+    water1.getComponent<PositionComponent>().setPos(1400, 100);
+    water2.getComponent<PositionComponent>().setPos(1208, 100);
+    water3.getComponent<PositionComponent>().setPos(1592, 100);
+
+    water11.addComponent<PositionComponent>();
+    water12.addComponent<PositionComponent>();
+    water13.addComponent<PositionComponent>();
+    water11.getComponent<PositionComponent>().setPos(1400, 400);
+    water12.getComponent<PositionComponent>().setPos(1208, 400);
+    water13.getComponent<PositionComponent>().setPos(1592, 400);
+
+    water21.addComponent<PositionComponent>();
+    water22.addComponent<PositionComponent>();
+    water23.addComponent<PositionComponent>();
+    water21.getComponent<PositionComponent>().setPos(1400, 800);
+    water22.getComponent<PositionComponent>().setPos(1208, 800);
+    water23.getComponent<PositionComponent>().setPos(1592, 800);
 
     newPlayer.addComponent<SpriteComponent>("assets/player.png");
-    water.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
+    water1.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
     water2.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
-    water.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
+    water3.addComponent<SpriteComponent>("assets/Wateranimation.png", 10, 100);
+
+    water11.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
+    water12.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
+    water13.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
+
+    water21.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 20, true);
+    water22.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 20, true);
+    water23.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 20, true);
 
 
 }
@@ -160,8 +190,8 @@ void Game::handleEvents() {
 void Game::update() {
     manager.refresh();
     manager.update();
-    std::cout <<    water.getComponent<PositionComponent>().x() << "," <<
-                    water.getComponent<PositionComponent>().y() << std::endl;
+    std::cout <<    water1.getComponent<PositionComponent>().x() << "," <<
+                    water1.getComponent<PositionComponent>().y() << std::endl;
 }
 
 // This is what gets rendered every frame
