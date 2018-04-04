@@ -93,6 +93,11 @@ public:
     void draw() override {
         texture->Draw(srcRect, destRect);
     }
+
+    SDL_Rect get_destRect() {
+        return this->destRect;
+    }
+
 };
 
 #endif //SIDESCROLLER_SPRITECOMPONENT_H

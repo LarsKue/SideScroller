@@ -190,6 +190,10 @@ void Game::update() {
     if (newPlayer.getComponent<TransformComponent>().position.x > 500) {
         newPlayer.getComponent<SpriteComponent>().setTex("assets/wateranimationtest02.png", 10, 100);
     }
+    if (newPlayer.getComponent<TransformComponent>().position.x > width) {
+        newPlayer.getComponent<TransformComponent>().position.x =
+                0 - newPlayer.getComponent<SpriteComponent>().get_destRect().w;
+    }
 }
 
 // This is what gets rendered every frame
