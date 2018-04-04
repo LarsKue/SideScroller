@@ -8,6 +8,7 @@
 #include "Components.h"
 #include "SDL2/SDL.h"
 #include "../TextureManager.h"
+#include <cmath>
 
 class SpriteComponent : public Component {
 private:
@@ -17,7 +18,7 @@ private:
 
     bool animated = false;
     int frames = 0;
-    int delay = 100;
+    double delay = 100;
     bool horizontal = false;
 
 public:
@@ -65,9 +66,9 @@ public:
         // scrolls through the frames in the source image
         if (animated) {
             if (horizontal)
-                srcRect.x = srcRect.w * static_cast<int> ((SDL_GetTicks() / delay) % frames);
+                srcRect.x = srcRect.w * static_cast<int> (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
             else
-                srcRect.y = srcRect.h * static_cast<int> ((SDL_GetTicks() / delay) % frames);
+                srcRect.y = srcRect.h * static_cast<int> (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
         }
 
         destRect.x = position->x();

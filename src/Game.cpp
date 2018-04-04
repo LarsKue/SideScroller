@@ -102,9 +102,9 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     water12.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
     water13.addComponent<SpriteComponent>("assets/wateranimationtest02.png", 10, 100);
 
-    water21.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 20, true);
-    water22.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 20, true);
-    water23.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 20, true);
+    water21.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60, true);
+    water22.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60, true);
+    water23.addComponent<SpriteComponent>("assets/waterbodyhorizontaltest01.png", 60, 1000/60, true);
 
 
 }
