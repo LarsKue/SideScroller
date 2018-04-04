@@ -1,9 +1,7 @@
 # ToDo
 
-- Deceleration of player on the ground
 - Make the map scroll instead of the player
 - Give the player some movement room before the map scrolls
-- Adjust Map Textures to reflect perspective
 - Add Walking & Jumping Animations
 - Add scrolling background layer
 - Add fixed background layer
