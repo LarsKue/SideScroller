@@ -45,6 +45,12 @@ Map::Map() {
     dest.h = tex_size * tex_scalar;
 }
 
+Map::~Map() {
+    dirtTex->Destroy();
+    grassTex->Destroy();
+    waterTex->Destroy();
+}
+
 void Map::LoadMap(int arr[20][25]) {
     for(int row = 0; row < 20; row++) {
         for(int column = 0; column < 25; column++) {

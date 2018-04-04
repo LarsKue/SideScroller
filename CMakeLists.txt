@@ -10,7 +10,7 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 #set(SOURCE_FILES src/main.cpp src/player.cpp src/player.h src/Game.cpp src/Game.h src/TextureManager.cpp src/TextureManager.h src/GameObject.h src/GameObject.cpp src/Map.h src/Map.cpp)
 file(GLOB SOURCES src/*.cpp)
-add_executable(SideScroller ${SOURCES} src/ECS/SpriteComponent.h src/ECS/TransformComponent.h src/Vector2D.h src/Vector2D.cpp)
+add_executable(SideScroller ${SOURCES})
 
 target_link_libraries(SideScroller SDL2main SDL2 SDL2_image)
 

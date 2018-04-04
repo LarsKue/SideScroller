@@ -23,6 +23,7 @@ public:
 
     static SDL_Renderer *renderer;
     static SDL_Window *window;
+    static SDL_Event event;
     static double FPS;
 
 

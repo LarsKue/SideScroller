@@ -1,7 +1,3 @@
-//
-// Created by Lars on 03/04/2018.
-//
-
 #ifndef SIDESCROLLER_SPRITECOMPONENT_H
 #define SIDESCROLLER_SPRITECOMPONENT_H
 
@@ -24,8 +20,13 @@ private:
 public:
 
     SpriteComponent() = default;
+
     SpriteComponent(const char* path) {
         texture = new TextureManager(path);
+    }
+
+    ~SpriteComponent() {
+        texture->Destroy();
     }
 
     SpriteComponent(const char* path, int nFrames, double mDelay) {
@@ -43,37 +44,14 @@ public:
         this->horizontal = horizontal;
     }
 
-    void setTex(const char* path) {
-        texture->setTexture(path);
-    }
-
-    void setTex(const char* path, int nFrames, double mDelay) {
-        animated = true;
-        frames = nFrames;
-        delay = mDelay;
-        texture->setTexture(path);
-    }
-
-    void setTex(const char* path, int nFrames, double mDelay, bool horizontal) {
-        animated = true;
-        frames = nFrames;
-        delay = mDelay;
-        texture->setTexture(path);
-        this->horizontal = horizontal;
-    }
-
     void init() override {
 
         transform = &entity->getComponent<TransformComponent>();
 
         srcRect.x = 0;
         srcRect.y = 0;
-        srcRect.w = 32;
-        srcRect.h = 32;
-
-        destRect.w = 32 * 6;
-        destRect.h = 32 * 6;
-
+        srcRect.w = transform->width;
+        srcRect.h = transform->height;
     }
 
     void update() override {
@@ -81,17 +59,38 @@ public:
         // scrolls through the frames in the source image
         if (animated) {
             if (horizontal)
-                srcRect.x = srcRect.w * static_cast<int> (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
+                srcRect.x = srcRect.w * (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
             else
-                srcRect.y = srcRect.h * static_cast<int> (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
+                srcRect.y = srcRect.h * (int(std::nearbyint(SDL_GetTicks() / delay)) % frames);
         }
 
         destRect.x = (int) transform->position.x;
         destRect.y = (int) transform->position.y;
+        destRect.w = transform->width * transform->scale;
+        destRect.h = transform->height * transform->scale;
     }
 
     void draw() override {
         texture->Draw(srcRect, destRect);
+    }
+
+    void setTex(const char* path) {
+        texture->setTexture(path);
+    }
+
+    void setTex(const char* path, int nFrames, double mDelay) {
+        texture->setTexture(path);
+        animated = true;
+        frames = nFrames;
+        delay = mDelay;
+    }
+
+    void setTex(const char* path, int nFrames, double mDelay, bool horizontal) {
+        texture->setTexture(path);
+        animated = true;
+        frames = nFrames;
+        delay = mDelay;
+        this->horizontal = horizontal;
     }
 
     SDL_Rect get_destRect() {

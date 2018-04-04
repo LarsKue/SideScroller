@@ -12,12 +12,17 @@ const int frameDelay = 1000 / maxFps;
 
 int main(int argc, char** argv) {
 
+    int a = 0;
+    int *b = &a;
+    *b = 1;
+    std::cout << a;
+
     Uint32 frameStart;
     int frameTime;
 
     // Initializing the game
     game = new Game();
-    game->init("SideScroller", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, false);
+    game->init("SideScroller", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
 
     // Game loop, keeps the game running
     while (game->running()) {

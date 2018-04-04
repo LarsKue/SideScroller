@@ -56,12 +56,14 @@ public:
     void draw() {
         for (auto &c : components) c->draw();
     }
+
     bool isActive() const { return active; }
+
     void destroy() { active = false; }
 
     // Check if entity has component, return true or false
     template <typename T> bool hasComponent() const {
-        return componentBitSet[getComponentTypeID<T>];
+        return componentBitSet[getComponentTypeID<T>()];
     }
 
     template <typename T, typename... TArgs> T& addComponent(TArgs&&... mArgs) {
